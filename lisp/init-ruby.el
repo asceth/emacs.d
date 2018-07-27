@@ -132,8 +132,39 @@
 ;;          :delimiter-mode nil)))
 ;;      (mmm-add-mode-ext-class 'ruby-mode "\\.rb\\'" 'ruby-heredoc-sql)))
 
-;(add-to-list 'mmm-set-file-name-for-modes 'ruby-mode)
+                                        ;(add-to-list 'mmm-set-file-name-for-modes 'ruby-mode)
 
+(require 'align)
 
+(add-to-list 'align-rules-list
+             '(ruby-comma-delimiter
+               (regexp . ",\\(\\s-*\\)[^# \t\n]")
+               (repeat . t)
+               (modes  . '(ruby-mode))))
+
+(add-to-list 'align-rules-list
+             '(ruby-hash-literal
+               (regexp . "\\(\\s-*\\)=>\\s-*[^# \t\n]")
+               (group 2 3)
+               (repeat . t)
+               (modes  . '(ruby-mode))))
+
+(add-to-list 'align-rules-list
+             '(ruby-hash-literal2
+               (regexp . "[a-z0-9]:\\(\\s-*\\)[^# \t\n]")
+               (repeat . t)
+               (modes  . '(ruby-mode))))
+
+(add-to-list 'align-rules-list
+             '(ruby-assignment-literal
+               (regexp . "\\(\\s-*\\)=\\s-*[^# \t\n]")
+               (repeat . t)
+               (modes  . '(ruby-mode))))
+
+(add-to-list 'align-rules-list
+             '(ruby-xmpfilter-mark
+               (regexp . "\\(\\s-*\\)# => [^#\t\n]")
+               (repeat . nil)
+               (modes  . '(ruby-mode))))
 
 (provide 'init-ruby)
