@@ -18,10 +18,6 @@
 (define-key ctl-x-map "F" 'find-function)
 (define-key ctl-x-map "V" 'find-variable)
 
-;; Map C-x C-d to dired-at-point
-;(global-set-key "\C-xd" 'dired-at-point)
-(global-set-key "\C-x\C-d" 'dired-at-point)
-
 ;; Map C-x f to find-file-at-point
 (global-set-key "\C-xf" 'find-file-at-point)
 
@@ -125,6 +121,13 @@
 (setq web-mode-style-padding 2)
 (setq web-mode-script-padding 2)
 (setq web-mode-block-padding 0)
+
+
+(defun align-to-colon (begin end)
+  "Align region to colon"
+  (interactive "r")
+  (align-regexp begin end
+                (rx ":" (group (zero-or-more (syntax whitespace))) ) 1 1 ))
 
 
 (provide 'init-local)
