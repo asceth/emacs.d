@@ -20,9 +20,9 @@
 (after-load 'dired
   (add-hook 'dired-mode-hook
             '(lambda ()
-	       ;; By default dired-find-alternate-file is bound to 'a' and '<RET>' is bound
-	       ;; dired-find-file
-	       (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
+               ;; By default dired-find-alternate-file is bound to 'a' and '<RET>' is bound
+               ;; dired-find-file
+               (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
                ;; Allow us to edit filenames from the dired buffer, 'e' was previously bound
                ;; to dired-find-file
                (define-key dired-mode-map "e" 'wdired-change-to-wdired-mode)
@@ -30,5 +30,9 @@
 
 (put 'dired-find-alternate-file 'disabled nil)
 
+;; Map C-x C-d to dired-at-point
+;; (global-set-key "\C-xd" 'dired-at-point)
+(global-set-key "\C-x\C-d" 'dired-at-point)
 
 (provide 'init-dired)
+;;; init-dired.el ends here
