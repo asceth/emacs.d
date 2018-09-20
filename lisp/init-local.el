@@ -28,7 +28,7 @@
 (global-set-key "\C-xs" 'save-buffer)
 
 ;; Map C-o to align, previously open-line
-(global-set-key "\C-o" 'align)
+(global-set-key "\C-o" 'align-current)
 
 ;; Map key sequences to Meta
 (global-set-key "\C-x\C-m" 'execute-extended-command)
@@ -128,6 +128,11 @@
   (interactive "r")
   (align-regexp begin end
                 (rx ":" (group (zero-or-more (syntax whitespace))) ) 1 1 ))
+
+(defun align-to-rocket (begin end)
+  "Align region to rocket"
+  (interactive "r")
+  (align-regexp begin end "\\(\\s-*\\)=>"))
 
 
 (provide 'init-local)
