@@ -1,6 +1,7 @@
 (when (maybe-require-package 'php-mode)
   (maybe-require-package 'smarty-mode)
   (maybe-require-package 'twig-mode)
+  (maybe-require-package 'php-extras)
 
   (c-add-style
    "phpcc"
@@ -38,15 +39,6 @@
               (when (eq (buffer-size) 0)
                 (insert "<?php\n\n"))))
 
-  (when (maybe-require-package 'ac-php)
-    (add-hook 'php-mode-hook
-              (lambda ()
-                (company-mode nil)
-                (auto-complete-mode nil)
-                (require 'ac-php)
-                (setq ac-sources '(ac-source-php))
-                (ac-php-core-eldoc-setup))))
-
   (with-eval-after-load "php"
     (defun php-beginning-of-defun-regexp (&optional arg)
       "Move to the beginning of the ARGth PHP function from point.
@@ -72,7 +64,6 @@ Implements PHP version of `beginning-of-defun-function'."
                 (re-search-forward php-beginning-of-defun-regexp
                                    nil 'noerror))
             (setq arg (1+ arg))))))))
-
 
 
 (provide 'init-php)
