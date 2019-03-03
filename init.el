@@ -87,14 +87,11 @@
 (require 'init-projectile)
 
 (require 'init-compile)
-;;(require 'init-crontab)
-(require 'init-textile)
 (require 'init-markdown)
 (require 'init-csv)
 (require 'init-erlang)
 (require 'init-javascript)
 (require 'init-php)
-(require 'init-org)
 (require 'init-nxml)
 (require 'init-html)
 (require 'init-css)
@@ -102,8 +99,6 @@
 (require 'init-http)
 (require 'init-python)
 (require 'init-haskell)
-(require 'init-elm)
-(require 'init-purescript)
 (require 'init-ruby)
 (require 'init-rails)
 (require 'init-sql)
@@ -111,15 +106,11 @@
 (require 'init-toml)
 (require 'init-yaml)
 (require 'init-docker)
-(require 'init-terraform)
-;;(require 'init-nix)
 (maybe-require-package 'nginx-mode)
 
 (require 'init-paredit)
 (require 'init-lisp)
 (require 'init-slime)
-(require 'init-clojure)
-(require 'init-clojure-cider)
 (require 'init-common-lisp)
 
 (when *spell-check-support-enabled*
@@ -128,17 +119,12 @@
 (require 'init-misc)
 
 (require 'init-folding)
-(require 'init-dash)
 
-;;(require 'init-twitter)
-;; (require 'init-mu)
-(require 'init-ledger)
 ;; Extra packages which don't require any configuration
 
 (require-package 'gnuplot)
 (require-package 'lua-mode)
 (require-package 'htmlize)
-(require-package 'dsvn)
 (when *is-a-mac*
   (require-package 'osx-location))
 (unless (eq system-type 'windows-nt)
