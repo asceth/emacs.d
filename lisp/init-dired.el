@@ -1,5 +1,8 @@
 (setq-default dired-dwim-target t)
 
+;; List directories first by using Lisp-only ls command
+(require 'ls-lisp)
+
 ;; Prefer g-prefixed coreutils version of standard utilities when available
 (let ((gls (executable-find "gls")))
   (when gls (setq insert-directory-program gls)))
@@ -10,8 +13,7 @@
 
 (after-load 'dired
   (setq dired-recursive-deletes 'top)
-  (define-key dired-mode-map [mouse-2] 'dired-find-file)
-  (define-key dired-mode-map (kbd "C-c C-p") 'wdired-change-to-wdired-mode))
+  (define-key dired-mode-map [mouse-2] 'dired-find-file))
 
 (when (maybe-require-package 'diff-hl)
   (after-load 'dired
