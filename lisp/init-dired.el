@@ -30,6 +30,9 @@
 
 (put 'dired-find-alternate-file 'disabled nil)
 
+;; group directories first
+(setq dired-listing-switches "-aBhl  --group-directories-first")
+
 ;; Map C-x C-d to dired-at-point
 ;; (global-set-key "\C-xd" 'dired-at-point)
 (global-set-key "\C-x\C-d" 'dired-at-point)
