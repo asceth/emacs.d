@@ -1,8 +1,13 @@
-;; -*- lexical-binding: t -*-
-(setq debug-on-error nil)
+;;; init.el --- Load the full configuration -*- lexical-binding: t -*-
+;;; Commentary:
 
-;;; This file bootstraps the configuration, which is divided into
-;;; a number of other files.
+;; This file bootstraps the configuration, which is divided into
+;; a number of other files.
+
+;;; Code:
+
+;; Do not produce backtraces on errors
+(setq debug-on-error nil)
 
 (let ((minver "24.3"))
   (when (version< emacs-version minver)
@@ -17,9 +22,12 @@
 (defconst *is-a-mac* (eq system-type 'darwin))
 
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;; Adjust garbage collection thresholds during startup, and thereafter
 ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (let ((normal-gc-cons-threshold (* 20 1024 1024))
       (init-gc-cons-threshold (* 128 1024 1024)))
@@ -28,9 +36,12 @@
             (lambda () (setq gc-cons-threshold normal-gc-cons-threshold))))
 
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;; Bootstrap config
 ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (require 'init-utils)
@@ -40,23 +51,29 @@
 (require 'init-exec-path) ;; Set up $PATH
 
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;; Allow users to provide an optional "init-preload-local.el"
 ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (require 'init-preload-local nil t)
 
 
-;;----------------------------------------------------------------------------
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
 ;; Load configs for specific features and modes
-;;----------------------------------------------------------------------------
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (require-package 'wgrep)
 (require-package 'diminish)
 (require-package 'scratch)
 (require-package 'command-log-mode)
 
-(require 'init-frame-hooks)
+(require 'init-scratch)
 (require 'init-themes)
 (require 'init-osx-keys)
 (require 'init-gui-frames)
@@ -69,14 +86,12 @@
 
 (require 'init-recentf)
 (require 'init-smex)
-;;(require 'init-ivy)
-;;(require 'init-helm)
-(require 'init-hippie-expand)
 (require 'init-company)
 (require 'init-windows)
 (require 'init-sessions)
 (require 'init-fonts)
-(require 'init-mmm)
+(require 'init-polymode)
+;(require 'init-mmm)
 
 (require 'init-editing-utils)
 (require 'init-whitespace)
@@ -136,36 +151,52 @@
   (add-hook 'after-init-hook (lambda () (require 'uptimes))))
 
 
-;;----------------------------------------------------------------------------
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
 ;; Allow access from emacsclient
-;;----------------------------------------------------------------------------
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (require 'server)
 (unless (server-running-p)
   (server-start))
 
-;;----------------------------------------------------------------------------
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
 ;; Variables configured via the interactive 'customize' interface
-;;----------------------------------------------------------------------------
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (when (file-exists-p custom-file)
   (load custom-file))
 
 
-;;----------------------------------------------------------------------------
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
 ;; Locales (setting them earlier in this file doesn't work in X)
-;;----------------------------------------------------------------------------
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (require 'init-locales)
 
 
-;;----------------------------------------------------------------------------
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
 ;; Allow users to provide an optional "init-local" containing personal settings
-;;----------------------------------------------------------------------------
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (require 'init-local nil t)
 
-
-
-(provide 'init)
 
 ;; Local Variables:
 ;; coding: utf-8
 ;; no-byte-compile: t
-;; End:
+
+(provide 'init)
+;;; init.el ends here

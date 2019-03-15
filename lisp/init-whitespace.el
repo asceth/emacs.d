@@ -1,7 +1,8 @@
 (setq-default show-trailing-whitespace t)
 (setq-default indicate-empty-lines nil)
 (setq whitespace-line-column 80)
-(setq whitespace-style '(face empty tabs lines-tail trailing tab-mark))
+(setq whitespace-style '(face tabs lines-tail trailing tab-mark))
+                                        ; (setq whitespace-global-modes '(not 'mode))
 (add-hook 'after-init-hook 'global-whitespace-mode)
 
 
@@ -18,6 +19,7 @@
                 term-mode-hook
                 comint-mode-hook
                 compilation-mode-hook
+                text-mode
                 twittering-mode-hook
                 minibuffer-setup-hook))
   (add-hook hook #'sanityinc/no-trailing-whitespace))

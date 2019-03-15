@@ -1,25 +1,27 @@
-;;----------------------------------------------------------------------------
-;; Stop C-z from minimizing windows under OS X
-;;----------------------------------------------------------------------------
-(defun sanityinc/maybe-suspend-frame ()
-  (interactive)
-  (unless (and *is-a-mac* window-system)
-    (suspend-frame)))
+;;; init-gui-frames --- Setup GUI features in emacs
+;;;
+;;; Commentary:
+;;;
+;;; Code:
 
-(global-set-key (kbd "C-z") 'sanityinc/maybe-suspend-frame)
-
-
-;;----------------------------------------------------------------------------
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
 ;; Suppress GUI features
-;;----------------------------------------------------------------------------
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (setq use-file-dialog nil)
 (setq use-dialog-box nil)
 (setq inhibit-startup-screen t)
 
 
-;;----------------------------------------------------------------------------
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
 ;; Window size and features
-;;----------------------------------------------------------------------------
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (when (fboundp 'tool-bar-mode)
   (tool-bar-mode -1))
 (when (fboundp 'set-scroll-bar-mode)
@@ -83,3 +85,4 @@
 
 
 (provide 'init-gui-frames)
+;;; init-gui-frames.el ends here
