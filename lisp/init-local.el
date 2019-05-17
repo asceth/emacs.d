@@ -3,7 +3,7 @@
 ;;
 
 (setq-default user-email-address "machinist@asceth.com")
-
+(set-frame-font "Terminess Powerline 10" nil t)
 
 ;;
 ;; Keybindings
