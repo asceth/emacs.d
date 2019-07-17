@@ -9,6 +9,7 @@
 (set-face-attribute 'default nil :font "Terminess Powerline-11")
 ;; (set-face-attribute 'default nil :font "IPAexMincho-11")
 
+(setq column-number-indicator-zero-based nil)
 
 
 ;;
