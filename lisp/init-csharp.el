@@ -12,6 +12,7 @@
 
   (setq indent-tabs-mode nil)
   (setq c-syntactic-indentation t)
+  (setq c-set-style "bsd")
   (setq c-basic-offset 2)
   (setq truncate-lines t)
   (setq tab-width 2))

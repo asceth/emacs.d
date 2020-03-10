@@ -107,7 +107,7 @@
 
 ;; C
 (setq c-basic-offset 2)
-(setq c-default-style "gnu")
+(setq c-default-style "bsd")
 
 ;; Java
 (setq default-tab-width 2)
