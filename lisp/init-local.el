@@ -7,8 +7,16 @@
 (set-fontset-font t nil (font-spec :size 11 :name "EmojiOne"))
 ;; (set-fontset-font t nil (font-spec :size 11 :name "IPAexMincho"))
 ;; (set-face-attribute 'default t :font "Terminess Powerline-11")
-(set-face-attribute 'default nil :font "Terminess Powerline-11")
+;;(set-face-attribute 'default nil :font "Terminess Powerline-11")
 ;; (set-face-attribute 'default nil :font "IPAexMincho-11")
+
+(if *is-a-win*
+    (progn
+      (set-fontset-font t nil (font-spec :size 11 :name "IPAexMincho"))
+      (set-face-attribute 'default nil :font "Terminus (TTF) for Windows-9.0"))
+  (progn
+    (set-fontset-font t nil (font-spec :size 11 :name "IPAexMincho"))
+    (set-face-attribute 'default nil :font "Terminess Powerline-11")))
 
 (setq column-number-indicator-zero-based nil)
 
@@ -102,7 +110,7 @@
 
 ;; C
 (setq c-basic-offset 2)
-(setq c-default-style "gnu")
+(setq c-default-style "bsd")
 
 ;; Java
 (setq default-tab-width 2)

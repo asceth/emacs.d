@@ -20,6 +20,7 @@
 
 (defconst *spell-check-support-enabled* nil) ;; Enable with t if you prefer
 (defconst *is-a-mac* (eq system-type 'darwin))
+(defconst *is-a-win* (eq system-type 'windows-nt))
 
 
 
@@ -122,6 +123,7 @@
 (require 'init-yaml)
 (require 'init-docker)
 (maybe-require-package 'nginx-mode)
+(require 'init-csharp)
 
 (require 'init-paredit)
 (require 'init-lisp)
