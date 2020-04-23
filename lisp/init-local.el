@@ -4,7 +4,8 @@
 
 (setq-default user-email-address "machinist@asceth.com")
 
-(set-fontset-font t nil (font-spec :size 11 :name "IPAexMincho"))
+(set-fontset-font t nil (font-spec :size 11 :name "EmojiOne"))
+;; (set-fontset-font t nil (font-spec :size 11 :name "IPAexMincho"))
 ;; (set-face-attribute 'default t :font "Terminess Powerline-11")
 (set-face-attribute 'default nil :font "Terminess Powerline-11")
 ;; (set-face-attribute 'default nil :font "IPAexMincho-11")
@@ -81,6 +82,8 @@
 ;;
 ;; Indents
 ;;
+
+(setq-default fill-column 90)
 
 ;; Ruby
 (add-hook 'ruby-mode-hook
