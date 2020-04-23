@@ -35,7 +35,7 @@
 ;; group directories first
 (setq dired-listing-switches "-aBhl  --group-directories-first")
 (setq ls-lisp-use-insert-directory-program t)
-(setq insert-directory-program "c:/msys64/usr/bin/ls")
+;; (setq insert-directory-program "c:/msys64/usr/bin/ls")
 
 ;; Map C-x C-d to dired-at-point
 ;; (global-set-key "\C-xd" 'dired-at-point)
