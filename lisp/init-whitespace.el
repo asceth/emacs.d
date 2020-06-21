@@ -25,12 +25,6 @@
   (add-hook hook #'sanityinc/no-trailing-whitespace))
 
 
-(require-package 'whitespace-cleanup-mode)
-(add-hook 'after-init-hook 'global-whitespace-cleanup-mode)
-(after-load 'whitespace-cleanup-mode
-  (diminish 'whitespace-cleanup-mode))
-
-(global-set-key [remap just-one-space] 'cycle-spacing)
-
+(add-hook 'before-save-hook 'whitespace-cleanup)
 
 (provide 'init-whitespace)
