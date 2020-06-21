@@ -27,4 +27,6 @@
 
 (add-hook 'before-save-hook 'whitespace-cleanup)
 
+(global-set-key [remap just-one-space] 'cycle-spacing)
+
 (provide 'init-whitespace)

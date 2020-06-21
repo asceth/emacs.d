@@ -35,7 +35,10 @@
 ;; group directories first
 (setq dired-listing-switches "-aBhl  --group-directories-first")
 (setq ls-lisp-use-insert-directory-program t)
-(setq insert-directory-program "C:/Program Files/Git/usr/bin/ls.exe")
+
+(if (eq system-type 'windows-nt)
+    (setq insert-directory-program "C:/Program Files/Git/usr/bin/ls.exe"))
+
 
 ;; Map C-x C-d to dired-at-point
 ;; (global-set-key "\C-xd" 'dired-at-point)
