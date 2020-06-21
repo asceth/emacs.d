@@ -1,7 +1,6 @@
 (when (maybe-require-package 'php-mode)
   (maybe-require-package 'smarty-mode)
   (maybe-require-package 'twig-mode)
-  (maybe-require-package 'php-extras)
 
   (c-add-style
    "phpcc"
