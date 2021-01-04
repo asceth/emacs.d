@@ -4,6 +4,9 @@
 (maybe-require-package 'typescript-mode)
 (maybe-require-package 'prettier-js)
 
+(maybe-require-package 'vue-mode)
+(maybe-require-package 'vue-html-mode)
+
 (defcustom preferred-javascript-mode
   (first (remove-if-not #'fboundp '(js2-mode js-mode)))
   "Javascript mode to use for .js files."

@@ -36,6 +36,7 @@
   (add-hook 'after-init-hook
             (lambda () (setq gc-cons-threshold normal-gc-cons-threshold))))
 
+(setq read-process-output-max (* 1024 1024)) ;; 1mb
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -129,6 +130,9 @@
 (require 'init-lisp)
 (require 'init-slime)
 (require 'init-common-lisp)
+
+; Language Server Protocol support
+(require 'init-lsp)
 
 (when *spell-check-support-enabled*
   (require 'init-spelling))
