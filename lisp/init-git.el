@@ -14,7 +14,7 @@
 (require-package 'git-link)
 
 (when (maybe-require-package 'magit)
-  (setq-default magit-diff-refine-hunk 'all)
+  (setq-default magit-diff-refine-hunk t)
 
   (sanityinc/fullframe-mode 'magit-status-mode)
 
@@ -42,15 +42,15 @@
 
 (maybe-require-package 'magit-todos)
 
-(add-hook 'git-commit-mode-hook 'goto-address-mode)
+(require-package 'fullframe)
 
-
+(when (maybe-require-package 'git-commit)
+  (add-hook 'git-commit-mode-hook 'goto-address-mode))
+
 ;; Convenient binding for vc-git-grep
 (with-eval-after-load 'vc
   (define-key vc-prefix-map (kbd "f") 'vc-git-grep))
 
-
-
 ;;; git-svn support
 
 ;; (when (maybe-require-package 'magit-svn)

@@ -44,8 +44,7 @@
     (byte-compile-file (download-site-lisp-module name url))))
 
 (defun site-lisp-library-loadable-p (name)
-  "Return whether or not the library `name' can be loaded from a
-source file under ~/.emacs.d/site-lisp/name/"
+  "Return whether or not the library NAME can be loaded from a source file under ~/.emacs.d/site-lisp/name/."
   (let ((f (locate-library (symbol-name name))))
     (and f (string-prefix-p (file-name-as-directory (site-lisp-dir-for name)) f))))
 

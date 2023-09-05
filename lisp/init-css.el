@@ -3,9 +3,13 @@
 ;;; Code:
 
 ;;; Colourise CSS colour literals
+;;; https://elpa.gnu.org/packages/rainbow-mode.html
+;;; TODO: fix modern rgba values with no commas
 (when (maybe-require-package 'rainbow-mode)
   (dolist (hook '(css-mode-hook html-mode-hook sass-mode-hook))
     (add-hook hook 'rainbow-mode)))
+
+
 
 
 ;;; Embedding in html
@@ -34,7 +38,6 @@
       :back "\"")))
   (dolist (mode (list 'html-mode 'nxml-mode))
     (mmm-add-mode-ext-class mode "\\.r?html\\(\\.erb\\)?\\'" 'html-css)))
-
 
 
 

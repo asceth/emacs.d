@@ -1,17 +1,9 @@
-;;; init-terraform.el --- Work with Terraform configurations -*- lexical-binding: t -*-
+;;; init-terraform.el --- Support for working with Terraform -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
 
-;;; Terraform
-
-(when (maybe-require-package 'terraform-mode)
-  ;; TODO: find/write a replacement for company-terraform
-  (with-eval-after-load 'terraform-mode
-    ;; I find formatters based on "reformatter" to be more reliable
-    ;; so I redefine `terraform-format-on-save-mode' here.
-    (when (maybe-require-package 'reformatter)
-      (reformatter-define terraform-format
-        :program "terraform" :args '("fmt" "-")))))
+(when (require-package 'terraform-mode)
+  (maybe-require-package 'terraform-docs))
 
 (provide 'init-terraform)
 ;;; init-terraform.el ends here

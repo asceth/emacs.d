@@ -23,6 +23,5 @@
            (maybe-require-package 'rg))
   (global-set-key (kbd "M-?") 'rg-project))
 
-
 (provide 'init-grep)
 ;;; init-grep.el ends here

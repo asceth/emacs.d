@@ -9,9 +9,6 @@
   (add-hook hook 'turn-on-elisp-slime-nav-mode))
 (add-hook 'emacs-lisp-mode-hook (lambda () (setq mode-name "ELisp")))
 
-(setq-default initial-scratch-message
-              (concat ";; Happy hacking, " user-login-name " - Emacs ♥ you!\n\n"))
-
 
 (defun sanityinc/headerise-elisp ()
   "Add minimal header and footer to an elisp buffer in order to placate flycheck."
@@ -179,10 +176,26 @@ there is no current file, eval the current buffer."
   "Enable features useful in any Lisp mode."
   (run-hooks 'sanityinc/lispy-modes-hook))
 
+(defun sanityinc/emacs-lisp-setup ()
+  "Enable features useful when working with elisp."
+  (set-up-hippie-expand-for-elisp))
+
+(defconst sanityinc/elispy-modes
+  '(emacs-lisp-mode ielm-mode)
+  "Major modes relating to elisp.")
+
+(defconst sanityinc/lispy-modes
+  (append sanityinc/elispy-modes
+          '(lisp-mode inferior-lisp-mode lisp-interaction-mode))
+  "All lispy major modes.")
+
 (require 'derived)
 
-(dolist (mode '(emacs-lisp-mode ielm-mode lisp-mode inferior-lisp-mode lisp-interaction-mode))
-  (add-hook (derived-mode-hook-name mode) 'sanityinc/lisp-setup))
+(dolist (hook (mapcar #'derived-mode-hook-name sanityinc/lispy-modes))
+  (add-hook hook 'sanityinc/lisp-setup))
+
+(dolist (hook (mapcar #'derived-mode-hook-name sanityinc/elispy-modes))
+  (add-hook hook 'sanityinc/emacs-lisp-setup))
 
 (when (boundp 'eval-expression-minibuffer-setup-hook)
   (add-hook 'eval-expression-minibuffer-setup-hook #'eldoc-mode))

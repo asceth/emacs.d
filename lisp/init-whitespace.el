@@ -2,7 +2,12 @@
 ;;; Commentary:
 ;;; Code:
 
-(setq-default show-trailing-whitespace nil)
+(setq-default show-trailing-whitespace t)
+(setq-default indicate-empty-lines nil)
+(setq whitespace-line-column 100)
+(setq whitespace-style '(face tabs lines-tail trailing tab-mark))
+                                        ; (setq whitespace-global-modes '(not 'mode))
+(add-hook 'after-init-hook 'global-whitespace-mode)
 
 
 ;;; Whitespace
@@ -14,7 +19,6 @@
 (dolist (hook '(prog-mode-hook text-mode-hook conf-mode-hook))
   (add-hook hook 'sanityinc/show-trailing-whitespace))
 
-
 (require-package 'whitespace-cleanup-mode)
 (add-hook 'after-init-hook 'global-whitespace-cleanup-mode)
 (with-eval-after-load 'whitespace-cleanup-mode
@@ -22,6 +26,7 @@
 
 (global-set-key [remap just-one-space] 'cycle-spacing)
 
+(add-hook 'before-save-hook 'whitespace-cleanup)
 
 (provide 'init-whitespace)
 ;;; init-whitespace.el ends here
