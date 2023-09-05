@@ -9,6 +9,8 @@
 ;; first-time startup on Emacs > 26.3.
 (setq custom-safe-themes t)
 
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+
 ;; If you don't customize it, this is the theme you get.
 (setq-default custom-enabled-themes '(sanityinc-tomorrow-bright))
 
@@ -38,6 +40,17 @@
   (setq custom-enabled-themes '(sanityinc-tomorrow-bright))
   (reapply-themes))
 
+(defun tvscodeplus ()
+  "Activate a vscode theme."
+  (interactive)
+  (setq custom-enabled-themes '(vscode-dark-plus))
+  (reapply-themes))
+
+(defun tvscode ()
+  "Activate a vscode theme."
+  (interactive)
+  (setq custom-enabled-themes '(vscode-dark))
+  (reapply-themes))
 
 (when (maybe-require-package 'dimmer)
   (setq-default dimmer-fraction 0.15)

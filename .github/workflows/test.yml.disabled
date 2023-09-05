@@ -8,10 +8,11 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-    continue-on-error: ${{ matrix.experimental }}
+    runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
+        os: [ubuntu-latest]
         emacs_version:
           - 26.1
           - 26.2
@@ -19,16 +20,15 @@ jobs:
           - 27.1
           - 27.2
           - 28.1
-          - 29.1
-        experimental: [false]
+          - snapshot
         include:
-          - emacs_version: snapshot
-            experimental: true
+          - os: macos-latest
+            emacs_version: 28.1
     steps:
     - uses: purcell/setup-emacs@master
       with:
         version: ${{ matrix.emacs_version }}
 
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v2
     - name: Check startup
       run: ./test-startup.sh

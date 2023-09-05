@@ -6,8 +6,8 @@
 
 ;;; Code:
 
-;; Produce backtraces when errors occur: can be helpful to diagnose startup issues
-;;(setq debug-on-error t)
+;; Do not produce backtraces on errors
+(setq debug-on-error nil)
 
 (let ((minver "26.1"))
   (when (version< emacs-version minver)
@@ -20,6 +20,7 @@
 
 (defconst *spell-check-support-enabled* nil) ;; Enable with t if you prefer
 (defconst *is-a-mac* (eq system-type 'darwin))
+(defconst *is-a-win* (eq system-type 'windows-nt))
 
 
 ;; Adjust garbage collection thresholds during startup, and thereafter
@@ -30,11 +31,12 @@
   (add-hook 'emacs-startup-hook
             (lambda () (setq gc-cons-threshold normal-gc-cons-threshold))))
 
-
+(setq read-process-output-max (* 1024 1024)) ;; 1mb
+
 ;; Bootstrap config
 
-
 (setq custom-file (locate-user-emacs-file "custom.el"))
+
 (require 'init-utils)
 (require 'init-site-lisp) ;; Must come before elpa, as it may provide package.el
 ;; Calls (package-initialize)
@@ -46,12 +48,12 @@
 (require 'init-preload-local nil t)
 
 ;; Load configs for specific features and modes
+
 (require-package 'diminish)
 (maybe-require-package 'scratch)
 (require-package 'command-log-mode)
 
-(require 'init-frame-hooks)
-(require 'init-xterm)
+(require 'init-scratch)
 (require 'init-themes)
 (require 'init-osx-keys)
 (require 'init-gui-frames)
@@ -75,21 +77,16 @@
 (require 'init-whitespace)
 
 (require 'init-vc)
-(require 'init-darcs)
 (require 'init-git)
-(require 'init-github)
 
 (require 'init-projectile)
 
 (require 'init-compile)
-(require 'init-crontab)
-(require 'init-textile)
 (require 'init-markdown)
 (require 'init-csv)
-(require 'init-erlang)
+;(require 'init-erlang)
 (require 'init-javascript)
 (require 'init-php)
-(require 'init-org)
 (require 'init-nxml)
 (require 'init-html)
 (require 'init-css)
@@ -97,44 +94,40 @@
 (require 'init-http)
 (require 'init-python)
 (require 'init-haskell)
-(require 'init-elm)
-(require 'init-purescript)
 (require 'init-ruby)
 (require 'init-rails)
 (require 'init-sql)
-(require 'init-ocaml)
-(require 'init-j)
-(require 'init-nim)
+;(require 'init-ocaml)
+;(require 'init-j)
+;(require 'init-nim)
 (require 'init-rust)
 (require 'init-toml)
 (require 'init-yaml)
 (require 'init-docker)
-(require 'init-terraform)
-(require 'init-nix)
 (maybe-require-package 'nginx-mode)
+(require 'init-csharp)
+(require 'init-unreal)
 
 (require 'init-paredit)
 (require 'init-lisp)
 (require 'init-slime)
-(require 'init-clojure)
-(require 'init-clojure-cider)
 (require 'init-common-lisp)
+
+; Language Server Protocol support
+(require 'init-lsp)
 
 (when *spell-check-support-enabled*
   (require 'init-spelling))
 
+(require 'init-snippets)
 (require 'init-misc)
 
 (require 'init-folding)
-(require 'init-dash)
-
-(require 'init-ledger)
-(require 'init-lua)
 
 ;; Extra packages which don't require any configuration
-
 (require-package 'sudo-edit)
 (require-package 'gnuplot)
+(require-package 'lua-mode)
 (require-package 'htmlize)
 (when *is-a-mac*
   (require-package 'osx-location))
@@ -150,12 +143,6 @@
 
 (require 'init-direnv)
 
-(when (and (require 'treesit nil t)
-           (fboundp 'treesit-available-p)
-           (treesit-available-p))
-  (require 'init-treesitter))
-
-
 
 ;; Allow access from emacsclient
 (add-hook 'after-init-hook

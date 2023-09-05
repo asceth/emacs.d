@@ -17,7 +17,6 @@ CVS
 cookies
 /newsticker
 \#*
-/tree-sitter
 /elpa
 /elpa-*
 site-lisp/package/

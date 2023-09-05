@@ -14,5 +14,14 @@
             (daemonp)))
   (exec-path-from-shell-initialize))
 
+
+(defun om-config-executable-find (command)
+  "Search for COMMAND and return the absolute file name.
+
+Return  COMMAND if  COMMAND is  not found  anywhere in  the value
+returned by the function `exec-path'."
+  (or (executable-find command)
+      command))
+
 (provide 'init-exec-path)
 ;;; init-exec-path.el ends here

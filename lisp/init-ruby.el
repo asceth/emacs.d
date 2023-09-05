@@ -12,8 +12,8 @@
 (add-auto-mode 'conf-mode "Gemfile\\.lock\\'")
 
 (setq-default
- ruby-use-encoding-map nil
- ruby-insert-encoding-magic-comment nil)
+ ruby-use-encoding-map t
+ ruby-insert-encoding-magic-comment t)
 
 (add-hook 'ruby-mode-hook 'subword-mode)
 
@@ -77,32 +77,28 @@
 
 
 ;;; ERB
-(require-package 'mmm-mode)
+(require-package 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 
-(require 'derived)
+;; (require-package 'mmm-mode)
 
-(defun sanityinc/set-up-mode-for-erb (mode)
-  (add-hook (derived-mode-hook-name mode) (lambda () (require 'mmm-erb)))
-  (mmm-add-mode-ext-class mode "\\.erb\\'" 'erb))
+;; (require 'derived)
 
-(dolist (mode '(html-mode html-erb-mode nxml-mode))
-  (sanityinc/set-up-mode-for-erb mode)
-  (mmm-add-mode-ext-class mode "\\.r?html\\(\\.erb\\)?\\'" 'html-js)
-  (mmm-add-mode-ext-class mode "\\.r?html\\(\\.erb\\)?\\'" 'html-css))
+;; (defun sanityinc/set-up-mode-for-erb (mode)
+;;   (add-hook (derived-mode-hook-name mode) (lambda () (require 'mmm-erb)))
+;;   (mmm-add-mode-ext-class mode "\\.erb\\'" 'erb))
 
-(mapc 'sanityinc/set-up-mode-for-erb
-      '(coffee-mode js-mode js2-mode js3-mode markdown-mode textile-mode))
-
-(mmm-add-mode-ext-class 'html-erb-mode "\\.jst\\.ejs\\'" 'ejs)
-
-(add-auto-mode 'html-erb-mode "\\.rhtml\\'" "\\.html\\.erb\\'")
-(add-to-list 'auto-mode-alist '("\\.jst\\.ejs\\'"  . html-erb-mode))
-
-(mmm-add-mode-ext-class 'yaml-mode "\\.yaml\\(\\.erb\\)?\\'" 'erb)
-(sanityinc/set-up-mode-for-erb 'yaml-mode)
-
-(dolist (mode (list 'js-mode 'js2-mode 'js3-mode))
-  (mmm-add-mode-ext-class mode "\\.js\\.erb\\'" 'erb))
+;; (dolist (mode '(html-mode html-erb-mode nxml-mode))
+;;   (sanityinc/set-up-mode-for-erb mode)
+;;   (mmm-add-mode-ext-class mode "\\.r?html\\(\\.erb\\)?\\'" 'html-js)
+;;   (mmm-add-mode-ext-class mode "\\.r?html\\(\\.erb\\)?\\'" 'html-css))
 
 
 
@@ -123,7 +119,82 @@
 
 ;; (add-to-list 'mmm-set-file-name-for-modes 'ruby-mode)
 
+;; (require 'align)
 
+;; (add-to-list 'align-rules-list
+;;              '(ruby-comma-delimiter
+;;                (regexp . ",\\(\\s-*\\)[^# \t\n]")
+;;                (repeat . t)
+;;                (modes  . '(ruby-mode))))
+
+;; (add-to-list 'align-rules-list
+;;              '(ruby-hash-literal
+;;                (regexp . "\\(\\s-*\\)=>\\s-*[^# \t\n]")
+;;                (group 2 3)
+;;                (repeat . t)
+;;                (modes  . '(ruby-mode))))
+
+;; (add-to-list 'align-rules-list
+;;              '(ruby-hash-literal2
+;;                (regexp . "[a-z0-9]:\\(\\s-*\\)[^# \t\n]")
+;;                (repeat . t)
+;;                (modes  . '(ruby-mode))))
+
+;; (add-to-list 'align-rules-list
+;;              '(ruby-assignment-literal
+;;                (regexp . "\\(\\s-*\\)=\\s-*[^# \t\n]")
+;;                (repeat . t)
+;;                (modes  . '(ruby-mode))))
+
+;; (add-to-list 'align-rules-list
+;;              '(ruby-xmpfilter-mark
+;;                (regexp . "\\(\\s-*\\)# => [^#\t\n]")
+;;                (repeat . nil)
+;;                (modes  . '(ruby-mode))))
+
+;;; Magic comments
+
+(add-hook 'ruby-mode-hook 'add-ruby-magic-comment-hook)
+
+(defun add-ruby-magic-comment-hook ()
+  "Insert the frozen string literal magic comment on save for ruby files."
+  (add-hook
+   (cond ((boundp 'before-save-hook)
+          (make-local-variable 'before-save-hook)
+          'before-save-hook)
+         ((boundp 'write-contents-functions) 'write-contents-functions)
+         ((boundp 'write-contents-hooks) 'write-contents-hooks))
+   #'ruby-mode-set-frozen-string-literal
+   nil 'local))
+
+(defun ruby-mode-set-frozen-string-literal ()
+  "Insert a magic comment for frozen string literals."
+  (interactive)
+  (let* ((variable "frozen_string_literal")
+         (value "true")
+         (prefix "# ")
+         (prefix-re (concat "^" (regexp-quote prefix)))
+         (suffix "")
+         (suffix-re (concat (regexp-quote suffix) "$"))
+         replaced-pos
+         end)
+    (save-excursion
+      (widen)
+      (goto-char (point-min))
+      (if (re-search-forward "^[^#]" (point-max) t)
+          (if (eq (point) (point-max))
+              (setq end (point-min))
+            (progn
+              (backward-char)
+              (setq end (point)))))
+      (goto-char (point-min))
+      (if (re-search-forward
+           (format "%s%s:.*%s" prefix-re variable suffix-re) (point-max) t)
+          (setq replaced-pos (point)))
+      (cond
+       ((null replaced-pos)
+        (goto-char end)
+        (insert (format "%s%s: %s%s\n" prefix variable value suffix)))))))
 
 (provide 'init-ruby)
 ;;; init-ruby.el ends here

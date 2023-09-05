@@ -67,15 +67,9 @@
 
 
 
-;;; Newline behaviour (see also electric-indent-mode, enabled above)
+;;; Newline behaviour
 
-(defun sanityinc/newline-at-end-of-line ()
-  "Move to end of line, enter a newline, and reindent."
-  (interactive)
-  (move-end-of-line 1)
-  (newline-and-indent))
-
-(global-set-key (kbd "S-<return>") 'sanityinc/newline-at-end-of-line)
+(global-set-key (kbd "RET") 'newline-and-indent)
 
 
 
@@ -143,9 +137,6 @@
 
 
 ;;; Handy key bindings
-
-(with-eval-after-load 'help
-  (define-key help-map "A" 'describe-face))
 
 (global-set-key (kbd "C-.") 'set-mark-command)
 (global-set-key (kbd "C-x C-.") 'pop-global-mark)
@@ -256,6 +247,7 @@ With arg N, insert N newlines."
 (global-set-key (kbd "M-j") 'join-line)
 
 
+
 ;; Random line sorting
 (defun sanityinc/sort-lines-random (beg end)
   "Sort lines in region from BEG to END randomly."
