@@ -9,6 +9,7 @@
   (setq lsp-eldoc-render-all t)
   (setq lsp-eldoc-enable-hover nil)
   (setq lsp-idle-delay 0.6)
+  (setq lsp-disabled-clients '(rubocop-ls))
   ;; rust
   (setq lsp-rust-server 'rust-analyzer)
   (setq lsp-rust-analyzer-cargo-watch-command "clippy")
