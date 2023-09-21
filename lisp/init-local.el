@@ -17,7 +17,28 @@
       (set-face-attribute 'default nil :font "Fira Code-9"))
   (progn
     (set-fontset-font t nil (font-spec :size 11 :name "IPAexMincho"))
-    (set-face-attribute 'default nil :font "Fira Code-10")))
+    ;; (set-face-attribute 'default nil :font "Terminess Powerline-11")
+    (set-face-attribute 'default nil :font "Fira Code-10")
+    ;; (set-frame-font "Terminess Powerline 10" nil t)
+    (set-frame-font "Fira Code-10" nil t)))
+
+(when (require-package 'ligature)
+  ;; Enable the www ligature in every possible major mode
+  (ligature-set-ligatures 't '("www"))
+
+  ;; Enable ligatures in programming modes
+  (ligature-set-ligatures 'prog-mode '("www" "**" "***" "**/" "*>" "*/" "\\\\" "\\\\\\" "{-" "::"
+                                       ":::" ":=" "!!" "!=" "!==" "-}" "----" "-->" "->" "->>"
+                                       "-<" "-<<" "-~" "#{" "#[" "##" "###" "####" "#(" "#?" "#_"
+                                       "#_(" ".-" ".=" ".." "..<" "..." "?=" "??" ";;" "/*" "/**"
+                                       "/=" "/==" "/>" "//" "///" "&&" "||" "||=" "|=" "|>" "^=" "$>"
+                                       "++" "+++" "+>" "=:=" "==" "===" "==>" "=>" "=>>" "<="
+                                       "=<<" "=/=" ">-" ">=" ">=>" ">>" ">>-" ">>=" ">>>" "<*"
+                                       "<*>" "<|" "<|>" "<$" "<$>" "<!--" "<-" "<--" "<->" "<+"
+                                       "<+>" "<=" "<==" "<=>" "<=<" "<>" "<<" "<<-" "<<=" "<<<"
+                                       "<~" "<~~" "</" "</>" "~@" "~-" "~>" "~~" "~~>" "%%"))
+
+  (global-ligature-mode 't))
 
 (setq column-number-indicator-zero-based nil)
 
