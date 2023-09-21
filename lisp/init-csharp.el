@@ -1,4 +1,3 @@
-(require-package 'csharp-mode)
 (require-package 'omnisharp)
 
 (defun asceth-csharp-mode-setup ()

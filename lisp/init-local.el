@@ -17,10 +17,11 @@
       (set-face-attribute 'default nil :font "Fira Code-9"))
   (progn
     (set-fontset-font t nil (font-spec :size 11 :name "IPAexMincho"))
-    (set-face-attribute 'default nil :font "Terminess Powerline-11")
-    (set-frame-font "Terminess Powerline 10" nil t)))
+    (set-face-attribute 'default nil :font "Fira Code-10")))
 
 (setq column-number-indicator-zero-based nil)
+
+(set-frame-font "Fira Code-10" nil t)
 
 (setq split-height-threshold nil
       split-weidth-threshold nil)

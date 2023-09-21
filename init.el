@@ -105,8 +105,9 @@
 (require 'init-yaml)
 (require 'init-docker)
 (maybe-require-package 'nginx-mode)
-(require 'init-csharp)
+;(require 'init-csharp)
 (require 'init-unreal)
+(require 'init-gdscript)
 
 (require 'init-paredit)
 (require 'init-lisp)
