@@ -4,7 +4,7 @@
 
 (setq-default show-trailing-whitespace t)
 (setq-default indicate-empty-lines nil)
-(setq whitespace-line-column 80)
+(setq whitespace-line-column 100)
 (setq whitespace-style '(face tabs lines-tail trailing tab-mark))
                                         ; (setq whitespace-global-modes '(not 'mode))
 (add-hook 'after-init-hook 'global-whitespace-mode)

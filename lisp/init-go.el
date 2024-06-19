@@ -8,3 +8,4 @@
 (add-auto-mode 'go-mode
                "\\.go\\'")
 
+(provide 'init-go)

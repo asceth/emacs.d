@@ -31,14 +31,14 @@
 
 (after-load 'dired
   (add-hook 'dired-mode-hook
-            '(lambda ()
-               ;; By default dired-find-alternate-file is bound to 'a' and '<RET>' is bound
-               ;; dired-find-file
-               (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
-               ;; Allow us to edit filenames from the dired buffer, 'e' was previously bound
-               ;; to dired-find-file
-               (define-key dired-mode-map "e" 'wdired-change-to-wdired-mode)
-               (define-key dired-mode-map "r" 'dired-create-directory))))
+            #'(lambda ()
+                ;; By default dired-find-alternate-file is bound to 'a' and '<RET>' is bound
+                ;; dired-find-file
+                (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
+                ;; Allow us to edit filenames from the dired buffer, 'e' was previously bound
+                ;; to dired-find-file
+                (define-key dired-mode-map "e" 'wdired-change-to-wdired-mode)
+                (define-key dired-mode-map "r" 'dired-create-directory))))
 
 (put 'dired-find-alternate-file 'disabled nil)
 
