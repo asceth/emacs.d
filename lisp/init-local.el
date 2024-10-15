@@ -42,7 +42,7 @@
 
 (setq column-number-indicator-zero-based nil)
 
-(set-frame-font "Fira Code-10" nil t)
+(set-frame-font "Fira Code-9" nil t)
 
 (setq split-height-threshold nil
       split-weidth-threshold nil)
