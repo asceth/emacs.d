@@ -117,7 +117,7 @@
 (require 'init-common-lisp)
 
 ; Language Server Protocol support
-(require 'init-lsp)
+;; (require 'init-lsp)
 
 (when *spell-check-support-enabled*
   (require 'init-spelling))

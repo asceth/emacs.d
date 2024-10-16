@@ -2,17 +2,28 @@
 ;;; Commentary:
 ;;; Code:
 
-(when (maybe-require-package 'rust-mode)
-  (with-eval-after-load 'rust-mode
-    (add-hook 'rust-mode-hook
-              (lambda ()
-                (setq indent-tabs-mode nil)))
-    (add-hook 'rust-mode-hook 'eglot-ensure)))
+(use-package rust-mode :ensure t)
 
-;; (when (maybe-require-package 'flycheck-rust)
-;; (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+(use-package flymake-clippy
+  :ensure t
+  :hook (rust-mode . flymake-clippy-setup-backend))
 
-(setq rust-format-on-save t)
+(use-package flycheck-rust :ensure t)
+
+(with-eval-after-load 'rust-mode
+  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+
+;; (use-package rustic
+;;   :ensure t
+;;   :config
+;;   (setq lsp-eldoc-hook nil)
+;;   (setq lsp-enable-symbol-highlighting nil)
+;;   (setq lsp-signature-auto-activate nil)
+;;   (setq rustic-format-on-save t)
+;;   (setq rustic-lsp-client 'eglot)
+;;   (add-hook 'rust-mode-hook
+;;             (lambda ()
+;;               (setq indent-tabs-mode nil))))
 
 (provide 'init-rust)
 ;;; init-rust.el ends here
