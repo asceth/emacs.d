@@ -133,8 +133,6 @@
 (require 'init-paredit)
 (require 'init-sly)
 (require 'init-lisp)
-;;(require 'init-slime)
-;;(require 'init-common-lisp)
 
 ; Language Server Protocol support
 ;; (require 'init-lsp)
@@ -158,7 +156,7 @@
 ;; Extra packages which don't require any configuration
 (require-package 'sudo-edit)
 (require-package 'gnuplot)
-(require-package 'lua-mode)
+;;(require-package 'lua-mode)
 (require-package 'htmlize)
 (when *is-a-mac*
   (require-package 'osx-location))

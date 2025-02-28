@@ -42,10 +42,7 @@
 
 (maybe-require-package 'magit-todos)
 
-(require-package 'fullframe)
-
-(when (maybe-require-package 'git-commit)
-  (add-hook 'git-commit-mode-hook 'goto-address-mode))
+(add-hook 'git-commit-mode-hook 'goto-address-mode)
 
 ;; Convenient binding for vc-git-grep
 (with-eval-after-load 'vc
