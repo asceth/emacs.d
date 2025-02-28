@@ -15,7 +15,7 @@
   :ensure t
   :hook ((rust-mode . eglot-ensure)
          (eglot-managed-mode . manually-activate-flymake)
-	 (ruby-mode . eglot-ensure)
+	 (ruby-mode . eglot-ensure))
   :config
   (add-to-list 'eglot-stay-out-of 'flymake))
 

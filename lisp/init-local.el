@@ -22,7 +22,10 @@
     ;; (set-frame-font "Terminess Powerline 10" nil t)
     (set-frame-font "Fira Code-10" nil t)))
 
-(when (require-package 'ligature)
+(use-package ligature
+	     :ensure t
+	     :config
+
   ;; Enable the www ligature in every possible major mode
   (ligature-set-ligatures 't '("www"))
 

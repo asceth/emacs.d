@@ -29,7 +29,7 @@
   (with-eval-after-load 'dired
     (add-hook 'dired-mode-hook 'diff-hl-dired-mode)))
 
-(after-load 'dired
+(with-eval-after-load 'dired
   (add-hook 'dired-mode-hook
             #'(lambda ()
                 ;; By default dired-find-alternate-file is bound to 'a' and '<RET>' is bound

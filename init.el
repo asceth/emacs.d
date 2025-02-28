@@ -134,7 +134,7 @@
 (require 'init-sly)
 (require 'init-lisp)
 ;;(require 'init-slime)
-(require 'init-common-lisp)
+;;(require 'init-common-lisp)
 
 ; Language Server Protocol support
 ;; (require 'init-lsp)
@@ -147,13 +147,13 @@
 
 (require 'init-folding)
 
-(require 'init-dash)
+;;(require 'init-dash)
 
-(require 'init-ledger)
-(require 'init-lua)
-(require 'init-uiua)
-(require 'init-zig)
-(require 'init-terminals)
+;;(require 'init-ledger)
+;;(require 'init-lua)
+;;(require 'init-uiua)
+;;(require 'init-zig)
+;;(require 'init-terminals)
 
 ;; Extra packages which don't require any configuration
 (require-package 'sudo-edit)
@@ -165,14 +165,14 @@
 (maybe-require-package 'dotenv-mode)
 (maybe-require-package 'shfmt)
 
-(when (maybe-require-package 'uptimes)
-  (setq-default uptimes-keep-count 200)
-  (add-hook 'after-init-hook (lambda () (require 'uptimes))))
+;;(when (maybe-require-package 'uptimes)
+;;  (setq-default uptimes-keep-count 200)
+;;  (add-hook 'after-init-hook (lambda () (require 'uptimes))))
 
 (when (fboundp 'global-eldoc-mode)
   (add-hook 'after-init-hook 'global-eldoc-mode))
 
-(require 'init-direnv)
+;;(require 'init-direnv)
 
 
 ;; Allow access from emacsclient
