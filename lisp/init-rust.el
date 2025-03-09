@@ -2,7 +2,10 @@
 ;;; Commentary:
 ;;; Code:
 
-(use-package rust-mode :ensure t)
+(use-package rust-mode
+  :ensure t
+  :config
+  (setq rust-format-on-save t))
 
 (use-package flymake-clippy
   :ensure t

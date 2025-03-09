@@ -16,7 +16,10 @@
   :hook ((rust-mode . eglot-ensure)
          (eglot-managed-mode . manually-activate-flymake)
 	 (ruby-mode . eglot-ensure))
+         (eglot-managed-mode . (lambda () (eglot-inlay-hints-mode -1))))
   :config
+  (setq eldoc-idle-delay 0.75)
+  (setq eglot-ignored-server-capabilities '(:inlayHintProvider))
   (add-to-list 'eglot-stay-out-of 'flymake))
 
 
