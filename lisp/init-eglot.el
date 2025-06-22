@@ -15,12 +15,27 @@
   :ensure t
   :hook ((rust-mode . eglot-ensure)
          (eglot-managed-mode . manually-activate-flymake)
-	 (ruby-mode . eglot-ensure))
+         (ruby-mode . eglot-ensure)
          (eglot-managed-mode . (lambda () (eglot-inlay-hints-mode -1))))
   :config
   (setq eldoc-idle-delay 0.75)
   (setq eglot-ignored-server-capabilities '(:inlayHintProvider))
-  (add-to-list 'eglot-stay-out-of 'flymake))
+  ;; Use below if eglot-events-buffer-size is not 0 and it's slow
+  (advice-add 'jsonrpc--log-event :override #'ignore)
+  ;; (fset #'jsonrpc--log-event #'ignore)
+  ;; do not log events, so no debugging
+  ;; (setf (plist-get eglot-events-buffer-config :size) 0)
+  ;; if last buffer is killed for a language server, kill the server
+  (setq eglot-autoshutdown t)
+  (add-to-list 'eglot-stay-out-of 'flymake)
+  (add-to-list 'eglot-server-programs '((rust-ts-mode rust-mode) .
+                                        ("rust-analyzer"
+                                         :initializationOptions ( :procMacro (:attributes (:enable t)
+                                                                                          :enable t)
+                                                                  :lens (:enable :json-false)
+                                                                  :check (:command "clippy")
+                                                                  :cargo (:buildScripts (:enable t)
+                                                                                        :features "all"))))))
 
 
 ;; (when (maybe-require-package 'eglot)
