@@ -16,6 +16,7 @@
   :hook ((rust-mode . eglot-ensure)
          (eglot-managed-mode . manually-activate-flymake)
          (ruby-mode . eglot-ensure)
+         (wgsl-mode . eglot-ensure)
          (eglot-managed-mode . (lambda () (eglot-inlay-hints-mode -1))))
   :config
   (setq eldoc-idle-delay 0.75)
@@ -28,6 +29,7 @@
   ;; if last buffer is killed for a language server, kill the server
   (setq eglot-autoshutdown t)
   (add-to-list 'eglot-stay-out-of 'flymake)
+  (add-to-list 'eglot-server-programs '(wgsl-mode . ("wgsl-analyzer")))
   (add-to-list 'eglot-server-programs '((rust-ts-mode rust-mode) .
                                         ("rust-analyzer"
                                          :initializationOptions ( :procMacro (:attributes (:enable t)

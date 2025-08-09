@@ -7,14 +7,14 @@
   :config
   (setq rust-format-on-save t))
 
-(use-package flymake-clippy
-  :ensure t
-  :hook (rust-mode . flymake-clippy-setup-backend))
+;; (use-package flymake-clippy
+;;   :ensure t
+;;   :hook (rust-mode . flymake-clippy-setup-backend))
 
-(use-package flycheck-rust :ensure t)
+;; (use-package flycheck-rust :ensure t)
 
-(with-eval-after-load 'rust-mode
-  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+;;(with-eval-after-load 'rust-mode
+;;  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 
 ;; (use-package rustic
 ;;   :ensure t
